@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://adei-mustahkim.github.io/sitemap.xml
