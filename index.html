@@ -18,20 +18,20 @@
        CSS VARIABLES & RESET
     ============================================= */
     :root {
-      --gold: #C9A84C;
-      --gold-light: #E8D28A;
-      --gold-dim: #8B6914;
-      --bg-deep: #080B10;
-      --bg-card: #0D1117;
-      --bg-elevated: #141B24;
-      --bg-glass: rgba(20, 27, 36, 0.7);
-      --text-primary: #F0EDE8;
-      --text-secondary: #9CA3AF;
-      --text-muted: #6B7280;
-      --border: rgba(201, 168, 76, 0.15);
-      --border-hover: rgba(201, 168, 76, 0.4);
-      --shadow-gold: 0 0 40px rgba(201, 168, 76, 0.08);
-      --shadow-card: 0 4px 32px rgba(0,0,0,0.5);
+      --gold: #1B3A6B;
+      --gold-light: #2B5BA8;
+      --gold-dim: #4A7CC7;
+      --bg-deep: #F4F6F9;
+      --bg-card: #FFFFFF;
+      --bg-elevated: #EDF0F5;
+      --bg-glass: rgba(255,255,255,0.85);
+      --text-primary: #0F1C2E;
+      --text-secondary: #4A5568;
+      --text-muted: #8896A8;
+      --border: rgba(27, 58, 107, 0.12);
+      --border-hover: rgba(27, 58, 107, 0.35);
+      --shadow-gold: 0 0 40px rgba(27, 58, 107, 0.08);
+      --shadow-card: 0 4px 32px rgba(27,58,107,0.10);
       --radius: 2px;
       --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -41,7 +41,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      background: var(--bg-deep);
+      background: #F4F6F9;
       color: var(--text-primary);
       font-family: var(--font-sans);
       font-weight: 300;
@@ -59,7 +59,7 @@
       content: '';
       position: fixed; inset: 0; z-index: 0;
       pointer-events: none;
-      opacity: 0.025;
+      opacity: 0.012;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
       background-size: 200px 200px;
     }
@@ -68,7 +68,7 @@
        SCROLLBAR
     ============================================= */
     ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg-deep); }
+    ::-webkit-scrollbar-track { background: #E2E8F0; }
     ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
 
     /* =============================================
@@ -81,7 +81,7 @@
       transition: background var(--transition), border-color var(--transition);
     }
     nav.scrolled {
-      background: rgba(8, 11, 16, 0.92);
+      background: rgba(244, 246, 249, 0.95);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
@@ -116,7 +116,7 @@
       background: transparent;
       font-family: var(--font-sans);
     }
-    .nav-cta:hover { background: var(--gold); color: var(--bg-deep); }
+    .nav-cta:hover { background: var(--gold); color: #FFFFFF; }
     .hamburger {
       display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
     }
@@ -126,7 +126,7 @@
     }
     .mobile-menu {
       display: none; position: fixed; inset: 0; z-index: 99;
-      background: var(--bg-deep);
+      background: #F4F6F9;
       flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
     }
     .mobile-menu.open { display: flex; }
@@ -155,8 +155,8 @@
     .hero-bg-lines {
       position: absolute; inset: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(27,58,107,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27,58,107,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
     }
     .hero-left {
@@ -209,7 +209,7 @@
       display: inline-flex; align-items: center; gap: 0.75rem;
       padding: 0.875rem 2.25rem;
       background: var(--gold);
-      color: var(--bg-deep);
+      color: #FFFFFF;
       font-size: 0.78rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -221,7 +221,8 @@
     .btn-primary:hover {
       background: var(--gold-light);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+      color: #FFFFFF;
+      box-shadow: 0 8px 32px rgba(27,58,107,0.25);
     }
     .btn-outline {
       display: inline-flex; align-items: center; gap: 0.75rem;
@@ -246,6 +247,7 @@
       display: flex; gap: 3rem; margin-top: 4rem;
       padding-top: 2rem;
       border-top: 1px solid var(--border);
+      box-shadow: 0 -2px 20px rgba(27,58,107,0.06);
     }
     .stat-item {}
     .stat-number {
@@ -301,13 +303,14 @@
       object-fit: cover;
       object-position: top center;
       position: relative; z-index: 1;
-      filter: grayscale(15%) contrast(1.05);
+      filter: grayscale(10%) contrast(1.02);
     }
     .hero-badge {
       position: absolute;
       bottom: -1rem; left: -1rem; z-index: 2;
-      background: var(--bg-card);
+      background: #FFFFFF;
       border: 1px solid var(--border-hover);
+      box-shadow: 0 4px 20px rgba(27,58,107,0.12);
       padding: 1rem 1.25rem;
       display: flex; align-items: center; gap: 0.75rem;
     }
@@ -480,7 +483,7 @@
       position: absolute; left: -4px; top: 0;
       width: 9px; height: 9px; border-radius: 50%;
       border: 1px solid var(--gold);
-      background: var(--bg-deep);
+      background: #F4F6F9;
     }
     .timeline-item:last-child { padding-bottom: 0; }
     .timeline-meta {
@@ -532,7 +535,7 @@
     .skill-category {
       padding: 2rem;
       border: 1px solid var(--border);
-      background: var(--bg-deep);
+      background: #F4F6F9;
       transition: border-color var(--transition), transform var(--transition);
       position: relative;
       overflow: hidden;
@@ -567,6 +570,7 @@
     .skill-tag:hover {
       border-color: var(--gold);
       color: var(--gold);
+      background: rgba(27,58,107,0.05);
     }
 
     /* =============================================
@@ -580,8 +584,9 @@
       gap: 3rem;
       padding: 3rem;
       border: 1px solid var(--border);
-      background: var(--bg-card);
+      background: #FFFFFF;
       position: relative;
+      box-shadow: 0 2px 20px rgba(27,58,107,0.08);
       align-items: start;
     }
     .edu-card::before {
@@ -697,7 +702,7 @@
       flex-shrink: 0; transition: all var(--transition);
     }
     .contact-item:hover .contact-icon {
-      background: var(--gold); color: var(--bg-deep);
+      background: var(--gold); color: #FFFFFF;
       border-color: var(--gold);
     }
     .contact-detail {}
@@ -742,6 +747,7 @@
     footer {
       background: var(--bg-card);
       border-top: 1px solid var(--border);
+      box-shadow: 0 -2px 20px rgba(27,58,107,0.06);
       padding: 2.5rem 4rem;
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 1rem;
@@ -813,7 +819,7 @@
       position: absolute; top: 1rem; right: 1rem;
       font-size: 0.6rem; letter-spacing: 0.15em;
       text-transform: uppercase; padding: 0.25rem 0.6rem;
-      background: var(--gold); color: var(--bg-deep); font-weight: 600;
+      background: var(--gold); color: #FFFFFF; font-weight: 600;
     }
     .jasa-icon { font-size: 1.75rem; margin-bottom: 1.25rem; }
     .jasa-name {
@@ -826,7 +832,8 @@
     .jasa-features li { font-size: 0.8rem; color: var(--text-secondary); padding-left: 1rem; position: relative; }
     .jasa-features li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-size: 0.75rem; }
     .jasa-price-wrap {
-      border-top: 1px solid var(--border); padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -2px 20px rgba(27,58,107,0.06); padding-top: 1.25rem;
       display: flex; align-items: flex-end; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;
     }
     .jasa-price-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
@@ -838,7 +845,7 @@
       color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
       padding: 0.5rem 1rem; transition: all var(--transition); cursor: pointer; font-weight: 500;
     }
-    .jasa-cta:hover { background: var(--gold); color: var(--bg-deep); border-color: var(--gold); }
+    .jasa-cta:hover { background: var(--gold); color: #FFFFFF; border-color: var(--gold); }
     .jasa-note {
       padding: 2rem 2.5rem; border: 1px solid var(--border); background: var(--bg-card);
       display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
