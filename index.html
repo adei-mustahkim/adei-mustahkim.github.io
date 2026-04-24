@@ -290,6 +290,47 @@
       color: var(--gold);
       transform: translateY(-2px);
     }
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 0.875rem 2.25rem;
+      border: 1px solid rgba(27,58,107,0.25);
+      background: rgba(27,58,107,0.06);
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .btn-download:hover {
+      background: var(--gold);
+      color: #fff;
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(27,58,107,0.2);
+    }
+
+    /* ===== CV PRINT STYLES ===== */
+    #cv-print-area {
+      display: none;
+    }
+    @media print {
+      body > *:not(#cv-print-area) { display: none !important; }
+      #cv-print-area {
+        display: block !important;
+        font-family: 'DM Sans', Arial, sans-serif;
+        color: #0F1C2E;
+        background: #fff;
+        padding: 0;
+        margin: 0;
+      }
+      @page {
+        margin: 15mm 15mm 15mm 15mm;
+        size: A4;
+      }
+    }
     .hero-stats {
       display: flex; gap: 3rem; margin-top: 4rem;
       padding-top: 2rem;
@@ -1023,6 +1064,7 @@
     <div class="hero-actions fade-up fade-up-delay-4">
       <a href="#experience" class="btn-primary">Lihat Pengalaman</a>
       <a href="https://wa.me/6285373328500?text=Halo%20Adei%2C%20saya%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut." target="_blank" class="btn-outline">Hubungi Saya</a>
+      <button class="btn-download" onclick="downloadCV()">&#8681; Download CV</button>
     </div>
     <div class="hero-stats fade-up fade-up-delay-5">
       <div class="stat-item">
@@ -1624,6 +1666,190 @@
     document.getElementById('waMessage').value = '';
 
     setTimeout(() => { status.style.display = 'none'; }, 5000);
+  }
+</script>
+
+<!-- CV PRINT AREA -->
+<div id="cv-print-area">
+  <style>
+    #cv-print-area { font-family: "DM Sans", Arial, sans-serif; color: #0F1C2E; font-size: 11pt; line-height: 1.5; }
+    .cv-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #1B3A6B; padding-bottom: 16px; margin-bottom: 20px; }
+    .cv-header-left h1 { font-family: Georgia, serif; font-size: 26pt; font-weight: 400; color: #1B3A6B; margin: 0 0 4px; }
+    .cv-header-left h2 { font-size: 10pt; font-weight: 400; color: #4A5568; letter-spacing: 0.1em; text-transform: uppercase; margin: 0; }
+    .cv-header-right { text-align: right; font-size: 9pt; color: #4A5568; line-height: 1.8; }
+    .cv-header-right a { color: #1B3A6B; }
+    .cv-section { margin-bottom: 18px; }
+    .cv-section-title { font-size: 9pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #1B3A6B; border-bottom: 1px solid #1B3A6B; padding-bottom: 3px; margin-bottom: 10px; }
+    .cv-profile { font-size: 10pt; color: #2D3748; line-height: 1.7; text-align: justify; }
+    .cv-job { margin-bottom: 14px; }
+    .cv-job-header { display: flex; justify-content: space-between; align-items: baseline; }
+    .cv-job-title { font-size: 12pt; font-weight: 600; color: #0F1C2E; }
+    .cv-job-period { font-size: 9pt; color: #1B3A6B; font-weight: 500; }
+    .cv-job-company { font-size: 10pt; color: #4A5568; margin: 1px 0 6px; }
+    .cv-job ul { margin: 0; padding-left: 16px; }
+    .cv-job ul li { font-size: 10pt; color: #2D3748; margin-bottom: 3px; line-height: 1.6; }
+    .cv-skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cv-skill-group { }
+    .cv-skill-label { font-size: 9pt; font-weight: 600; color: #1B3A6B; margin-bottom: 2px; }
+    .cv-skill-tags { font-size: 9pt; color: #2D3748; }
+    .cv-edu { display: flex; justify-content: space-between; align-items: baseline; }
+    .cv-edu-left h3 { font-size: 12pt; font-weight: 600; color: #0F1C2E; margin: 0 0 2px; }
+    .cv-edu-left p { font-size: 10pt; color: #4A5568; margin: 0; }
+    .cv-edu-right { text-align: right; font-size: 10pt; color: #1B3A6B; font-weight: 600; }
+    .cv-cert-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .cv-cert-item { font-size: 9pt; border: 1px solid #1B3A6B; color: #1B3A6B; padding: 2px 8px; border-radius: 2px; }
+    .cv-footer { margin-top: 20px; border-top: 1px solid #E2E8F0; padding-top: 10px; text-align: center; font-size: 8pt; color: #8896A8; }
+  </style>
+
+  <!-- HEADER -->
+  <div class="cv-header">
+    <div class="cv-header-left">
+      <h1>Adei Tiar Mustahkim</h1>
+      <h2>Business Intelligence Analyst &amp; IT Specialist</h2>
+    </div>
+    <div class="cv-header-right">
+      &#128205; Condongcatur, Depok, Sleman, Yogyakarta<br>
+      &#128222; +62 853-7332-8500<br>
+      &#9993; adi.tiar56@gmail.com<br>
+      &#127760; adei-mustahkim.github.io
+    </div>
+  </div>
+
+  <!-- PROFIL -->
+  <div class="cv-section">
+    <div class="cv-section-title">Profil Profesional</div>
+    <p class="cv-profile">Profesional data dengan pengalaman lebih dari 7 tahun dalam pengelolaan, pembersihan, dan validasi data. Saat ini berfokus sebagai Business Intelligence Analyst dengan spesialisasi pada analisis data bisnis dan visualisasi menggunakan Power BI &amp; Tableau. Lulusan S1 Sistem Informasi (Cumlaude, IPK 3.78) yang berkomitmen tinggi untuk menerjemahkan data mentah menjadi wawasan (insights) berharga guna mendukung pengambilan keputusan strategis perusahaan.</p>
+  </div>
+
+  <!-- PENGALAMAN -->
+  <div class="cv-section">
+    <div class="cv-section-title">Pengalaman Kerja</div>
+
+    <div class="cv-job">
+      <div class="cv-job-header">
+        <span class="cv-job-title">Business Intelligence (BI) Analyst</span>
+        <span class="cv-job-period">Feb 2026 — Sekarang</span>
+      </div>
+      <div class="cv-job-company">PT Cakra Radha Mustika — Yogyakarta</div>
+      <ul>
+        <li>Mengembangkan dan memelihara dashboard interaktif menggunakan <strong>Power BI dan Tableau</strong> untuk monitoring KPI perusahaan secara real-time.</li>
+        <li>Melakukan query data kompleks dengan <strong>SQL Server</strong> untuk proses ETL dari berbagai sumber data.</li>
+        <li>Menganalisis tren data historis dan operasional untuk menghasilkan actionable insights bagi manajemen.</li>
+        <li>Berkolaborasi dengan stakeholders lintas departemen untuk otomatisasi pelaporan data bisnis.</li>
+      </ul>
+    </div>
+
+    <div class="cv-job">
+      <div class="cv-job-header">
+        <span class="cv-job-title">Data Entry &amp; Data Quality Specialist</span>
+        <span class="cv-job-period">Jul 2018 — Jan 2026</span>
+      </div>
+      <div class="cv-job-company">PT Cakra Radha Mustika — Yogyakarta</div>
+      <ul>
+        <li>Mengelola input data rata-rata <strong>2.000 baris/hari</strong> dengan tingkat akurasi tinggi sesuai SOP.</li>
+        <li>Mengeksekusi data cleansing bulanan yang berhasil mengurangi <strong>data duplikat sebesar 10%</strong>.</li>
+        <li>Menyusun laporan akurasi data mingguan yang <strong>mempercepat koreksi data sebesar 50%</strong>.</li>
+        <li>Melaksanakan quality control data untuk memastikan konsistensi dan integritas data operasional.</li>
+      </ul>
+    </div>
+
+    <div class="cv-job">
+      <div class="cv-job-header">
+        <span class="cv-job-title">Students Staff DAAK</span>
+        <span class="cv-job-period">Agu 2017 — Feb 2018</span>
+      </div>
+      <div class="cv-job-company">Universitas Amikom Yogyakarta</div>
+      <ul>
+        <li>Memastikan kelancaran proses administrasi akademik mahasiswa.</li>
+        <li>Memberikan layanan informasi akademik yang akurat kepada mahasiswa dan orang tua.</li>
+      </ul>
+    </div>
+
+    <div class="cv-job">
+      <div class="cv-job-header">
+        <span class="cv-job-title">Asisten Praktikum</span>
+        <span class="cv-job-period">Feb 2017 — Jun 2017</span>
+      </div>
+      <div class="cv-job-company">Universitas Amikom Yogyakarta</div>
+      <ul>
+        <li>Membimbing mahasiswa selama sesi praktikum dan mengelola administrasi kelas.</li>
+        <li>Membantu dosen dalam penyusunan silabus dan pendampingan akademik mahasiswa.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PENDIDIKAN -->
+  <div class="cv-section">
+    <div class="cv-section-title">Pendidikan</div>
+    <div class="cv-edu">
+      <div class="cv-edu-left">
+        <h3>S1 Sistem Informasi — <em>Cumlaude</em></h3>
+        <p>Universitas Amikom Yogyakarta | Okt 2014 — Apr 2018</p>
+        <p style="font-size:9pt;color:#4A5568;margin-top:4px;">Skripsi: "Sistem Informasi Pelanggaran Siswa dengan Bahasa Pemrograman CodeIgniter"</p>
+      </div>
+      <div class="cv-edu-right">IPK: 3.78 / 4.00</div>
+    </div>
+  </div>
+
+  <!-- KEAHLIAN -->
+  <div class="cv-section">
+    <div class="cv-section-title">Keahlian Teknis</div>
+    <div class="cv-skills-grid">
+      <div class="cv-skill-group">
+        <div class="cv-skill-label">Data &amp; Analytics</div>
+        <div class="cv-skill-tags">SQL Server, Power BI, Tableau, Data Analysis, Data Cleansing, ETL Process, KPI Monitoring</div>
+      </div>
+      <div class="cv-skill-group">
+        <div class="cv-skill-label">Pemrograman &amp; Otomatisasi</div>
+        <div class="cv-skill-tags">Excel Advanced, Macro &amp; VBA, PivotTable, Python, PHP, HTML/CSS, CodeIgniter, C++</div>
+      </div>
+      <div class="cv-skill-group" style="margin-top:8px;">
+        <div class="cv-skill-label">AI &amp; Teknologi Baru</div>
+        <div class="cv-skill-tags">AI Prompt Engineering, ChatGPT, Gemini AI, Workflow Automation</div>
+      </div>
+      <div class="cv-skill-group" style="margin-top:8px;">
+        <div class="cv-skill-label">Infrastruktur IT</div>
+        <div class="cv-skill-tags">Mikrotik, Debian Linux, Windows Server, Network Admin, Server Admin</div>
+      </div>
+      <div class="cv-skill-group" style="margin-top:8px;">
+        <div class="cv-skill-label">Desain &amp; Kreatif</div>
+        <div class="cv-skill-tags">Canva, Photoshop, CorelDRAW, CapCut, Visual Reporting</div>
+      </div>
+      <div class="cv-skill-group" style="margin-top:8px;">
+        <div class="cv-skill-label">Soft Skills</div>
+        <div class="cv-skill-tags">Analytical Thinking, Problem Solving, Detail Oriented, Teamwork, Customer Service</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERTIFIKASI -->
+  <div class="cv-section">
+    <div class="cv-section-title">Sertifikasi</div>
+    <div class="cv-cert-list">
+      <span class="cv-cert-item">SQL Intermediate</span>
+      <span class="cv-cert-item">Linux Essential Professional Development</span>
+      <span class="cv-cert-item">IT Essential</span>
+    </div>
+  </div>
+
+  <div class="cv-footer">
+    adei-mustahkim.github.io &nbsp;|&nbsp; adi.tiar56@gmail.com &nbsp;|&nbsp; +62 853-7332-8500 &nbsp;|&nbsp; Yogyakarta, Indonesia
+  </div>
+</div>
+
+<script>
+  function downloadCV() {
+    // Show print area, trigger print as PDF, then hide again
+    const cvArea = document.getElementById('cv-print-area');
+    cvArea.style.display = 'block';
+
+    // Small delay to ensure render
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => {
+        cvArea.style.display = 'none';
+      }, 1000);
+    }, 200);
   }
 </script>
 </body>
